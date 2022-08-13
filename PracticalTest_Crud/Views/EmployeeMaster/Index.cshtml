@@ -1,0 +1,397 @@
+﻿@model IEnumerable<PracticalTest_Crud.Models.EmployeeMaster>
+@{
+    ViewBag.Title = "Index";
+}
+<html>
+<head>
+    <title>Single Page Application Crud Operation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css" />
+</head>
+<body>
+    <h1 class="text-center">Employee History</h1>
+    <table id="tblEmployees" class="table display" style="width:100px">
+        <thead>
+            <tr>
+                <th style="width:100px">ID</th>
+                <th style="width:150px">Employee RollNo</th>
+                <th style="width:150px">FirstName</th>
+                <th style="width:150px">LastName</th>
+                <th style="width:150px">MiddleName</th>
+                <th style="width:150px">Address</th>
+                <th style="width:150px">Designation</th>
+                <th style="width:150px">Department</th>
+                <th style="width:150px">Date of Birth</th>
+                <th style="width:150px">Country</th>
+                <th style="width:150px">State</th>
+                <th style="width:150px">City</th>
+                <th style="width:150px">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (PracticalTest_Crud.Models.EmployeeMaster employeeMaster in Model)
+            {
+                <tr>
+                    <td class="EmployeeId">
+                        <span>@employeeMaster.EmployeeId</span>
+                    </td>
+                    <td class="EmployeeRollNo">
+                        <span>@employeeMaster.EmployeeRollNo</span>
+                        <input type="text" value="@employeeMaster.EmployeeRollNo" style="display:none" />
+                    </td>
+                    <td class="EmpFirstName">
+                        <span>@employeeMaster.EmpFirstName</span>
+                        <input type="text" value="@employeeMaster.EmpFirstName" style="display:none" />
+                    </td>
+                    <td class="EmpMiddleName">
+                        <span>@employeeMaster.EmpMiddleName</span>
+                        <input type="text" value="@employeeMaster.EmpMiddleName" style="display:none" />
+                    </td>
+                    <td class="EmpLastName">
+                        <span>@employeeMaster.EmpLastName</span>
+                        <input type="text" value="@employeeMaster.EmpLastName" style="display:none" />
+                    </td>
+                    <td class="Address">
+                        <span>@employeeMaster.Address</span>
+                        <input type="text" value="@employeeMaster.Address" style="display:none" />
+                    </td>
+                    <td class="Designation">
+                        <span>@employeeMaster.Designation</span>
+                        <input type="text" value="@employeeMaster.Designation" style="display:none" />
+                    </td>
+                    <td class="Department">
+                        <span>@employeeMaster.Department</span>
+                        <input type="text" value="@employeeMaster.Department" style="display:none" />
+                    </td>
+                    <td class="DOB">
+                        <span>@employeeMaster.DOB.ToString("yyyy-MM-dd")</span>
+                        <input type="date" value="@employeeMaster.DOB.ToString("yyyy-MM-dd")" style="display:none" />
+                    </td>
+                    <td class="CountryId">
+                        <span>@employeeMaster.CountryName</span>
+                        <select id="ddlCountries" class="form-control" style="width:140px">
+                            <option></option>
+                        </select>
+
+                    </td>
+                    <td class="StateId">
+                        <span>@employeeMaster.StateName</span>
+                    </td>
+                    <td class="CityId">
+                        <span>@employeeMaster.CityName</span>
+                    </td>
+                    <td colspan="2">
+                        <a class="Edit btn btn-success" href="#">Edit</a>
+                        <a href="#" class="Update" style="display:none">Update</a> |
+                        <a href="#" class="Cancel" style="display:none">Cancel</a>
+                        <a href="#" class="Delete btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <br />
+    <h1 class="text-center">Add New Employee</h1>
+    <form>
+        <table cellpadding="0" cellspacing="0" border="0" class="table">
+            <tr>
+                <td style="width:150px">
+                    Employee RollNo
+                    <input type="text" id="txtEmpRollNo" class="form-control" style="width:140px" />
+                </td>
+                <td style="width:150px">
+                     FirstName
+                    <input type="text" id="txtFirstName" class="form-control" style="width:140px" />
+                </td>
+                <td style="width:150px">
+                     MiddleName
+                    <input type="text" id="txtMiddleName" class="form-control" style="width:140px" />
+                </td>
+                <td style="width:150px">
+                    LastName
+                    <input type="text" id="txtLastName" class="form-control" style="width:140px" />
+                </td>
+                <td style="width:150px">
+                    Address
+                    <textarea type="text" id="txtAddress" class="form-control" style="width:140px"></textarea>
+                </td>
+                <td style="width:150px">
+                    Date of Birth
+                    <input type="date" id="txtDOB" class="form-control" style="width:140px" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width:150px">
+                    Department
+                    <select id="txtDepartment" class="form-control">
+                        <option>--select--</option>
+                        <option value="1">HR</option>
+                        <option value="2">Sales</option>
+                        <option value="3">Employee</option>
+                        <option value="4">Accountant</option>
+                        <option value="5">Manager</option>
+                    </select>
+                </td>
+                <td style="width:150px">
+                    Designation
+                    <input type="text" id="txtDesignation" class="form-control" style="width:140px" />
+                </td>
+                <td style="width:150px">
+                    Country
+                    <select id="ddlCountries" class="form-control" style="width:140px"></select>
+                </td>
+                <td style="width:150px">
+                    State
+                    <select id="ddlState" class="form-control" style="width:140px"></select>
+                </td>
+                <td style="width:150px">
+                    City
+                    <select id="ddlCity" class="form-control" style="width:140px"></select>
+                </td>
+            </tr>
+            <tr class="text-center">
+                <td style="width:150px"  colspan="6">
+                    <input type="button" class="btn btn-primary" id="btnAdd" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
+<script>
+    $("#tblEmployees").DataTable();
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "/EmployeeMaster/Country/",
+            contentType: "application/json",
+            datatype: "json",
+            success: function (r) {
+                $("#ddlCountries").append($("<Option></Option>").val("0").html("Select Country"))
+                $.each(r, function () {
+                    $("#ddlCountries").append($("<Option></Option>").val(this.Value).html(this.Text));
+                });
+            }
+        });
+        $("#ddlCountries").on("change", function () {
+            $("#ddlState").html('');
+            $("#ddlCity").html('');
+            $.ajax({
+                type: "POST",
+                url: "/EmployeeMaster/State/?CountryId=" + $("#ddlCountries").val(),
+                contentType: "application/json",
+                datatype: "json",
+                success: function (data) {
+                    if (data.Status)
+                    {
+                        $("#ddlState").append($("<Option></Option>").val("0").html("Select State"))
+                        $.each(data.Data, function () {
+                            $("#ddlState").append($("<Option></Option>").val(this.Value).html(this.Text));
+                        });
+                    }
+                    else {
+                        $("#ddlState").append($("<Option></Option>").val("0").html("Select State"))
+                        $("#ddlCity").append($("<Option></Option>").val("0").html("Select City"))
+                    }
+                }
+            });
+        });
+        $("#ddlState").on("change", function () {
+            $("#ddlCity").html('');
+            $.ajax({
+                type: "POST",
+                url: "/EmployeeMaster/City/?StateId=" + $("#ddlState").val(),
+                contentType: "application/json",
+                datatype: "json",
+                success: function (data) {
+                    if (data.Status) {
+                        $("#ddlCity").append($("<Option></Option>").val("0").html("Select City"))
+                        $.each(data.Data, function () {
+                            $("#ddlCity").append($("<Option></Option>").val(this.Value).html(this.Text));
+                        });
+                    }
+                    else {
+                        $("#ddlCity").append($("<Option></Option>").val("0").html("Select City"))
+                    }
+                }
+            });
+        });
+    });
+
+    $("body").on("click", "#btnAdd", function () {
+        var EmployeeRollNo = $("#txtEmpRollNo");
+        var empFirstName = $("#txtFirstName");
+        var empMiddleName = $("#txtMiddleName");
+        var empLastName = $("#txtLastName");
+        var address = $("#txtAddress");
+        var dob = $("#txtDOB");
+        var department = $("#txtDepartment");
+        var designation = $("#txtDesignation");
+        var countryId = $("#ddlCountries");
+        var stateId = $("#ddlState");
+        var cityId = $("#ddlCity");
+        $.ajax({
+            type: "POST",
+            url: "/EmployeeMaster/InsertEmployee",
+            data: '{EmployeeRollNo:"' + EmployeeRollNo.val() + '",empFirstName:"' + empFirstName.val() + '",empMiddleName:"' + empMiddleName.val() + '",empLastName:"' + empLastName.val() + '",address:"' + address.val() + '",dob:"' + dob.val() + '",department:"' + department.val() + '",designation:"' + designation.val() + '",countryId:"'+countryId.val()+'",stateId:"'+stateId.val()+'",cityId:"'+cityId.val()+'"}',
+            contentType: "application/json",
+            datatype: JSON,
+            success: function (r) {
+                var row = $("#tblEmployees tr:last-child");
+                if ($("#tblEmployees tr:last-child span").eq(0).html() != "&nbsp") {
+                    row = row.clone();
+                }
+                location.reload();
+                //AppendRow(row, r.employeeId,
+                //EmployeeRollNo.val(),
+                //empFirstName.val(),
+                //empMiddleName.val(),
+                //empLastName.val(),
+                //address.val(),
+                //cityId.val(),
+                //stateId.val(),
+                //countryId.val(),
+                //dob.val(),
+                //department.val(),
+                //designation.val());
+            }
+        });
+    });
+    function AppendRow(row, employeeId, EmployeeRollNo, empFirstName, empMiddleName, empLastName, address, city, state, country, dob, department, designation) {
+        $(".employeeId", row).find("span").html(employeeId);
+
+        $(".empRollNo", row).find("span").html(empRollNo);
+        $(".empRollNo", row).find("input").val(empRollNo);
+
+        $(".empFirstName", row).find("span").html(empFirstName);
+        $(".empFirstName", row).find("input").val(empFirstName);
+
+        $(".empMiddleName", row).find("span").html(empMiddleName);
+        $(".empMiddleName", row).find("input").val(empMiddleName);
+
+        $(".empLastName", row).find("span").html(empLastName);
+        $(".empLastName", row).find("input").val(empLastName);
+
+        $(".address", row).find("span").html(address);
+        $(".address", row).find("input").val(address);
+
+        $(".city", row).find("span").html(city);
+        $(".city", row).find("input").val(city);
+
+        $(".state", row).find("span").html(state);
+        $(".state", row).find("input").val(state);
+
+        $(".country", row).find("span").html(country);
+        $(".country", row).find("input").val(country);
+
+        $(".state", row).find("span").html(state);
+        $(".state", row).find("input").val(state);
+
+        $(".dob", row).find("span").html(dob);
+        $(".dob", row).find("input").val(dob);
+
+        $(".department", row).find("span").html(department);
+        $(".department", row).find("input").val(department);
+
+        $(".designation", row).find("span").html(designation);
+        $(".designation", row).find("input").val(designation);
+
+        $("#tblEmployees").append(row);
+    }
+    $("body").on("click", "tblEmployees .Cancel", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                $(this).find("input").show();
+                $(this).find("span").hide();
+            }
+        });
+        row.find(".Edit").show();
+        row.find(".Delete").show();
+        row.find("update").hide();
+        $(this).hide();
+    });
+    $("body").on("click", "#tblEmployees .Delete", function () {
+        if (confirm("Do you want to delete? ")) {
+            var row = $(this).closest("tr");
+            var EmployeeId = row.find("span").html();
+            $.ajax({
+                type: "POST",
+                url: "/EmployeeMaster/DeleteEmployee?EmployeeId=" + EmployeeId,
+                contentType: "application/json",
+                datatype: "json",
+                success: function (response) {
+                    if ($("#tblEmployees tr").length > 2) {
+                        row.remove();
+                    }
+                    else {
+                        row.find(".Edit").hide();
+                        row.find(".Update").hide();
+                        row.find("span").html('&nbsp');
+                    }
+                }
+            });
+        }
+    });
+    $("body").on("click", "#tblEmployees .Update", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                var span = $(this).find("span");
+
+                var input = $(this).find("input");
+                span.html(input.val());
+                span.hide();
+                input.show();
+            }
+        });
+        row.find(".Edit").show();
+        row.find(".Delete").show();
+        row.find(".Cancel").hide();
+        $(this).hide();
+        var employee = {};
+        var EmployeeId = row.find(".EmployeeId").find("span").html();
+        var EmployeeRollNo = row.find(".EmployeeRollNo").find("span").html();
+        var EmpFirstName = row.find(".EmpFirstName").find("span").html();
+        var EmpMiddleName = row.find(".EmpMiddleName").find("span").html();
+        var EmpLastName = row.find(".EmpLastName").find("span").html();
+        var Address = row.find(".Address").find("span").html();
+        var Department = row.find(".Department").find("span").html();
+        var Designation = row.find(".Designation").find("span").html();
+        var DOB = row.find(".DOB").find("span").html();
+        $.ajax({
+            type: "POST",
+            url: "/EmployeeMaster/UpdateEmployee?EmployeeId=" + EmployeeId +"&EmployeeRollNo="+EmployeeRollNo+ "&EmpFirstName=" + EmpFirstName + "&EmpMiddleName=" + EmpMiddleName + "&EmpLastName=" + EmpLastName + "&Address=" + Address + "&Department=" + Department + "&Designation=" + Designation + "&DOB=" + DOB,
+           
+            contentType: "application/json",
+            datatype: "json",
+            success: function (response) {
+                if ($("#tblEmployees tr").length > 2) {
+                }
+                else {
+                    row.find(".Edit").hide();
+                    row.find(".Delete").hide();
+                    row.find("span").html('&nbsp');
+                }
+            }
+        });
+    });
+    $("body").on("click", "#tblEmployees .Edit", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                $(this).find("input").show();
+                $(this).find("span").hide();
+            }
+        });
+        row.find(".Update").show();
+        row.find(".Cancel").show();
+        row.find("Delete").hide();
+        $(this).hide();
+    });
+</script>
